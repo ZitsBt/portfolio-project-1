@@ -1,0 +1,498 @@
+// ===fonts===
+
+@font-face
+  font-family: lato
+  src: url("../fonts/lato-regular.woff2") format("woff2")
+  src: url("../fonts/lato-regular.woff") format("woff")
+  src: url("../fonts/lato-regular.ttf") format("truetype")
+  font-weight: 400
+  font-style: normal
+
+@font-face
+  font-family: lato
+  src: url("../fonts/lato-bold.woff2") format("woff2")
+  src: url("../fonts/lato-bold.woff") format("woff")
+  src: url("../fonts/lato-bold.ttf") format("truetype")
+  font-weight: 700
+  font-style: normal
+
+@font-face
+  font-family: lato
+  src: url("../fonts/lato-black.woff2") format("woff2")
+  src: url("../fonts/lato-black.woff") format("woff")
+  src: url("../fonts/lato-black.ttf") format("truetype")
+  font-weight: 900
+  font-style: normal
+
+.txt-normal
+  font-family: lato
+  font-weight: 400
+  font-style: normal
+
+.txt-bold
+  font-family: lato
+  font-weight: 700
+  font-style: normal
+
+.txt-black
+  font-family: lato
+  font-weight: 900
+  font-style: normal
+
+//=========
+
+//===colors===
+
+$page-header-btn-static: #fff
+$page-header-btn-hover: #ffccd3
+$page-header-btn-active: #ff99a7
+
+//===========
+
+//===defolt===
+
+*,
+::before,
+::after
+  box-sizing: border-box
+
+.container
+  margin: 0 auto
+  width: 87.5rem
+
+.backdrop-show
+  position: relative
+
+  &::before
+    display: block
+    content: ''
+    background: rgba(0, 0, 0, 0.8)
+    position: fixed
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    visibility: hidden
+    opacity: 0
+    transition: all .2s cubic-bezier(0.28, 0.14, 0.73, 0.87)
+    z-index: 3
+
+  &__active::before
+    visibility: visible
+    opacity: 1
+
+//=========
+
+//===header===
+
+.page-header
+  position: relative
+  background: #222
+  z-index: 5
+
+  &::before
+    display: block
+    content: ''
+    height: 4.6875rem
+    background: rgba(0, 0, 0, 0.8)
+    position: fixed
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    visibility: hidden
+    opacity: 0
+    transition: all .2s cubic-bezier(0.28, 0.14, 0.73, 0.87)
+    z-index: 5
+
+  &::after
+    display: block
+    content: ''
+    height: 4.6875rem
+    background: #222
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    z-index: -1
+
+  &.active.page-header::before
+    opacity: 1
+    visibility: visible
+
+  &__wrp
+    display: flex
+    justify-content: space-between
+    align-items: center
+    height: 4.6875rem
+    position: relative
+
+  &__left
+    display: flex
+    gap: 6rem
+    align-items: flex-end
+
+  &__link
+    height: 2.375rem
+
+  &__search
+    display: flex
+    position: relative
+
+    &.active .page-header__search-close
+      top: 0
+      z-index: 6
+
+    &.active.page-header__search::after
+      visibility: visible
+      width: 32.5rem
+      z-index: 5
+
+    &.active .page-header__search-btn
+      z-index: 6
+
+    &.active .page-header__search-form
+      z-index: 6
+
+    &::after
+      display: block
+      content: ""
+      background: linear-gradient(90deg,#f16d7f,#f1e4e6)
+      height: 4.6875rem
+      position: absolute
+      z-index: 4
+      top: -1.75rem
+      left: -4.6rem
+      visibility: hidden
+      width: 0
+      transition: all .5s cubic-bezier(.19,1,.22,1)
+
+    &-background::after
+      visibility: visible
+      width: 32.5rem
+
+    &-close
+      position: absolute
+      left: -3.3rem
+      top: -4rem
+      transition: all .3s cubic-bezier(.19,1,.22,1)
+      cursor: pointer
+
+      &.active
+        top: 0
+
+      &-icon
+        display: block
+        width: 26px
+        height: 26px
+        stroke: $page-header-btn-static
+        transition: all .2s cubic-bezier(0.28, 0.14, 0.73, 0.87)
+
+        &:hover
+          stroke: $page-header-btn-hover
+
+        &:active
+          stroke: $page-header-btn-active
+
+    &-btn
+      border: none
+      background: transparent
+      padding: 0
+      height: 1.75rem
+      position: relative
+      cursor: pointer
+
+    &-icon
+      position: absolute
+      z-index: 2
+      fill: $page-header-btn-static
+      transition: all .2s cubic-bezier(0.28, 0.14, 0.73, 0.87)
+
+      &:hover
+        fill: $page-header-btn-hover
+
+      &:active
+        fill: $page-header-btn-active
+
+    &-form
+      position: absolute
+      left: 4rem
+
+    &-field
+      border: none
+      width: 22rem
+      height: 1.75rem
+      padding: 0px
+      margin: 0
+      font-size: 1.125rem
+      color: #fff
+      background: transparent
+      display: block
+
+      &::placeholder
+        color: #fff
+
+      &:focus-visible
+        background: transparent
+        outline: none
+        border: none
+
+        & .page-header__search::after
+          visibility: visible
+          width: 32.5rem
+
+  &__right
+    display: flex
+    align-items: flex-end
+    gap: 4rem
+
+  &__reg
+
+    &-link
+      fill: $page-header-btn-static
+      height: 1.8rem
+
+      &:hover
+        fill: $page-header-btn-hover
+
+      &:active
+        fill: $page-header-btn-active
+
+  &__cart
+
+    &-btn
+      fill: $page-header-btn-static
+      height: 1.8rem
+      background: transparent
+      border: none
+      padding: 0
+      position: relative
+      width: 32px
+      height: 29px
+      cursor: pointer
+
+      &:hover.page-header__cart-btn::after
+        visibility: visible
+        top: -23px
+
+      &::before
+        display: block
+        content: ''
+        background: url(../img/Close.svg) 50% 50% no-repeat
+        width: 2rem
+        height: 1.68rem
+        position: absolute
+        top: -48px
+        z-index: 2
+        transition: all .5s cubic-bezier(.19,1,.22,1)
+
+      &::after
+        display: block
+        content: ""
+        position: absolute
+        width: 5rem
+        height: 75px
+        top: -98px
+        left: -24px
+        z-index: 1
+        transition: all .5s cubic-bezier(.19,1,.22,1)
+        cursor: pointer
+        background: linear-gradient(90deg,#f16d7f,65%,#f1e4e6)
+        visibility: hidden
+
+      &-icon
+        position: absolute
+        top: 0
+        left: 0
+        transition: all .5s cubic-bezier(.19,1,.22,1)
+        z-index: 2
+
+      &.active.page-header__cart-btn::before
+        top: 4px
+
+      &.active.page-header__cart-btn::after
+        visibility: visible
+        top: -23px
+
+      &.active .page-header__cart-btn-icon
+        top: -52px
+        z-index: 1
+
+  &__dropdown
+    position: absolute
+    z-index: 1
+    opacity: 0
+    left: 75.9rem
+    top: -43.1rem
+    transition: all .5s cubic-bezier(.19,1,.22,1)
+    z-index: -1
+
+    &.active
+      opacity: 1
+      top: 4.7rem
+
+.nav
+  position: relative
+
+  &__toggle
+    width: 2rem
+    height: 1.68rem
+    position: relative
+    cursor: pointer
+
+    &.active
+      z-index: 5
+
+    &:hover.nav__toggle::after
+      visibility: visible
+      top: -25px
+
+    &::before
+      display: block
+      content: ''
+      background: url(../img/Close.svg) 50% 50% no-repeat
+      width: 2rem
+      height: 1.68rem
+      position: absolute
+      top: -52px
+      z-index: 2
+      transition: all .5s cubic-bezier(.19,1,.22,1)
+
+    &::after
+      display: block
+      content: ""
+      position: absolute
+      width: 5rem
+      height: 75px
+      top: -100px
+      left: -24px
+      z-index: 1
+      transition: all .5s cubic-bezier(.19,1,.22,1)
+      cursor: pointer
+      background: linear-gradient(90deg,#f16d7f,65%,#f1e4e6)
+      visibility: hidden
+
+    &.active.nav__toggle::before
+      top: 0
+
+    &.active.nav__toggle::after
+      visibility: visible
+      top: -25px
+
+    &.active .nav__wrp
+      top: -52px
+      visibility: hidden
+      z-index: 1
+
+  &__wrp
+    display: flex
+    flex-flow: column
+    justify-content: space-between
+    height: 1.68rem
+    position: absolute
+    z-index: 2
+    top: 0
+    transition: all .5s cubic-bezier(.19,1,.22,1)
+
+    &::before
+      content: ''
+      display: block
+      width: 2rem
+      height: 4px
+      background: $page-header-btn-static
+
+    &::after
+      content: ''
+      display: block
+      width: 2rem
+      height: 4px
+      background: $page-header-btn-static
+
+  &__brick
+    display: block
+    width: 2rem
+    height: 4px
+    background: $page-header-btn-static
+
+  &__close
+    position: absolute
+    top: -27px
+    left: -28px
+    z-index: 2
+    visibility: hidden
+
+  &__list
+    height: 47.8rem
+    width: 19rem
+    background: #FFF
+
+  &__block
+    list-style-type: none
+    padding: 0
+    margin: 0
+    padding: 0 33px 20px 33px
+
+    &:first-child
+      padding: 33px 33px 20px 33px
+
+    &-title
+      text-transform: uppercase
+      color: #F16D7F
+      font-size: 16px
+
+    &-items
+      text-transform: none
+      list-style-type: none
+      padding: 0
+      margin: 0
+      padding: 12px 20px 0 20px
+
+    &-item
+      padding-bottom: 30px
+      position: relative
+
+      &:hover
+        &.nav__block-item::after
+          width: 14.375rem
+        & .nav__block-link
+          color: #fff
+
+      &::after
+        display: block
+        content: ""
+        height: 3px
+        width: 0
+        height: 27px
+        background: linear-gradient(90deg,#f16d7f,50%,#f1e4e6,#fff)
+        transition: all .5s cubic-bezier(.19,1,.22,1)
+        margin-top: 5px
+        position: absolute
+        top: -9px
+        left: -7px
+
+      &:last-child
+        padding: 10px
+
+    &-link
+      color: #6F6E6E
+      text-decoration: none
+      position: absolute
+      top: 0
+      left: 0
+      z-index: 1
+
+//=========
+
+//===main theme====
+
+.main-theme
+  background: #F1E4E6
+  margin-bottom: 300px
+
+  &-img
+    display: block
+    width: 50rem
+    height: 47.8rem
+    position: relative
+    left: -13rem
