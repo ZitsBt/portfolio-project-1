@@ -48,6 +48,8 @@ const app = new Vue({
       this.$refs.navBtn.classList.toggle('active');
       this.$refs.navDropdown.classList.toggle('active');
       this.$refs.pageHeader.classList.toggle('active');
+      this.$refs.backdrop
+        .classList.toggle('backdrop-show__active');
     },
 
     cartToggle() {
