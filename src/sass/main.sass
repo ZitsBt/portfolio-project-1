@@ -335,6 +335,13 @@ $page-header-btn-active: #ff99a7
 .nav
   position: relative
 
+  &:hover .nav__toggle::after
+    visibility: visible
+    top: -1.5625rem
+
+  &:hover .nav__toggle
+    z-index: 5
+
   &__toggle
     width: 2rem
     height: 1.68rem
@@ -343,10 +350,6 @@ $page-header-btn-active: #ff99a7
 
     &.active
       z-index: 5
-
-    &:hover.nav__toggle::after
-      visibility: visible
-      top: -1.5625rem
 
     &::before
       display: block
@@ -487,12 +490,57 @@ $page-header-btn-active: #ff99a7
 //===main theme====
 
 .main-theme
-  background: #F1E4E6
   margin-bottom: 18.75rem
+  position: relative
 
-  &-img
+  &::after
+    display: block
+    content: ''
+    height: 47.8rem
+    background: #F1E4E6
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    z-index: -1
+
+  &__wrp
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+  &__img
     display: block
     width: 50rem
     height: 47.8rem
     position: relative
     left: -13rem
+
+  &__box
+    display: flex
+    justify-content: space-between
+    width: 36rem
+
+    &::before
+      display: block
+      content: ''
+      width: 12px
+      height: 92px
+      background: #F16D7F
+
+  &__slogan
+    height: 5.8125rem
+    width: 24rem
+    font-size: 2rem
+    line-height: 38px
+    margin: 0 10rem 0 0
+    text-transform: uppercase
+
+    &-large
+      font-size: 48px
+      line-height: 58px
+      display: block
+
+    &-color
+      color: #F16D7F
