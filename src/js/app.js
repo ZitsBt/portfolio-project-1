@@ -1,10 +1,52 @@
 const app = new Vue({
   el: "#app",
   data: {
-    showSearch: false
+    showSearch: false,
+    products: [],
+    filtered: [],
+    error: true
   },
 
   methods: {
+    getJson(url) {
+      return fetch(url)
+        .then(result => result.json())
+        .catch(error => {
+          // console.log(error)
+          this.$refs.error.text = error;
+        })
+    },
+
+    postJson(url, data) {
+      return fetch(url, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+        .then(result => result.json())
+        .catch(error => {
+          // console.log(error)
+          this.$refs.error.text = error;
+        })
+    },
+
+    putJson(url, data) {
+      return fetch(url, {
+        method: 'PUT',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+        .then(result => result.json())
+        .catch(error => {
+          // console.log(error)
+          this.$refs.error.text = error;
+        })
+    },
+
     focusSearchActive() {
       if (this.showSearch === false) {
         this.showSearch = !this.showSearch;
@@ -17,9 +59,10 @@ const app = new Vue({
 
         this.$refs.backdrop
           .classList.add('backdrop-show__active');
+        document.body.classList.add('scroll-lock');
 
         this.$refs.pageHeader.classList.add('active');
-        this.$refs.searchActive.classList.add('active')
+        this.$refs.searchActive.classList.add('active');
       }
     },
 
@@ -38,6 +81,7 @@ const app = new Vue({
 
         this.$refs.backdrop
           .classList.remove('backdrop-show__active');
+        document.body.classList.remove('scroll-lock');
 
         this.$refs.pageHeader.classList.remove('active');
         this.$refs.searchActive.classList.remove('active')
@@ -50,13 +94,17 @@ const app = new Vue({
       this.$refs.pageHeader.classList.toggle('active');
       this.$refs.backdrop
         .classList.toggle('backdrop-show__active');
+      document.body.classList.toggle('scroll-lock');
     },
-
-    cartToggle() {
-      this.$refs.cartBtn.classList.toggle('active');
-
-    }
+  },
+  mounted() {
+    this.getJson(`/api/products`)
+      .then(data => {
+        for (let item of data) {
+          this.products.push(item);
+          this.filtered.push(item);
+        }
+      });
   }
-
 })
 

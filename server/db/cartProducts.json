@@ -1,0 +1,13 @@
+{
+    "amount": 79,
+    "countGoods": 1,
+    "contents": [
+        {
+            "id_product": 101,
+            "product_name": "Ellery x m'o capsule",
+            "price": "56.00",
+            "image": "img/catalog/male101.png",
+            "quantity": 1
+        }
+    ]
+}
